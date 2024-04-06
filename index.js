@@ -12,12 +12,12 @@ app.get('/', async(req, res) => {
 
 app.get('/challenges', async(req, res) => {
 
-    axios.get('https://www.ghw.mlh.io/challenges')
+    axios.get('https://ghw.mlh.io/challenges')
     .then((response) => {
         const html = response.data;
         const $ = cheerio.load(html);
         
-    $('a.contains("")',html).each(function(){
+    $('a:contains("")',html).each(function(){
         const title = $(this).text();
         const url = $(this).attr('href');
 
@@ -28,7 +28,7 @@ app.get('/challenges', async(req, res) => {
     });
         
         res.json(challenges);
-    })
+    }).catch(err => console.log(err));
 
 })
 
